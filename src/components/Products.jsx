@@ -3,6 +3,7 @@ import styled from 'styled-components'
 // import { popularProducts } from '../data';
 import Product from './Product';
 import axios from 'axios';
+import { BASE_URL } from '../requestMethods';
 
 const Container = styled.div`
   padding: 20px;
@@ -14,14 +15,15 @@ const Container = styled.div`
 const Products = ({cat, filters, sort}) => {
   const [porducts, setProducts] = useState([]);
   const [filteredPorducts, setFilteredProducts] = useState([]);
+  
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         const res = await axios.get(
           cat
-            ? `http://localhost:5000/api/products?category=${cat}`
-            : "http://localhost:5000/api/products"
+            ? `${BASE_URL}/products?category=${cat}`
+            : `${BASE_URL}/products`
         );
         setProducts(res.data);
       } catch (err) {}
